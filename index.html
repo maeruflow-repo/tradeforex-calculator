@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalkulator Lot & Risk/Reward Forex & Crypto</title>
+    <title>Kalkulator Lot, Risk, Margin & Swap Forex Pro</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome CDN for Icons -->
@@ -40,13 +40,6 @@
         input[type="number"] {
             -moz-appearance: textfield;
         }
-        .toggle-checkbox:checked {
-            right: 0;
-            border-color: #ef4444;
-        }
-        .toggle-checkbox:checked + .toggle-label {
-            background-color: #ef4444;
-        }
     </style>
 </head>
 <body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-full font-sans transition-colors duration-200">
@@ -60,7 +53,7 @@
                 </div>
                 <div>
                     <h1 class="font-bold text-lg leading-tight">TradeCalc Pro</h1>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Kalkulator Lot & Risk/Reward</p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Kalkulator Lot, Risk, Margin & Swap</p>
                 </div>
             </div>
             
@@ -215,6 +208,72 @@
                         class="w-full bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/50 rounded-xl px-4 py-3 font-semibold text-emerald-700 dark:text-emerald-300 focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                 </div>
             </div>
+
+            <!-- Card 3: Margin & Leverage Calculator (FITUR BARU) -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-200/80 dark:border-slate-700 space-y-4">
+                <h2 class="font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2 text-base">
+                    <i class="fa-solid fa-chart-pie text-blue-500"></i> Margin & Leverage
+                </h2>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">
+                        Pilih Leverage Broker
+                    </label>
+                    <select id="leverageSelect" class="w-full bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl px-4 py-3 font-semibold text-slate-800 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                        <option value="50">1 : 50</option>
+                        <option value="100" selected>1 : 100</option>
+                        <option value="200">1 : 200</option>
+                        <option value="400">1 : 400</option>
+                        <option value="500">1 : 500</option>
+                        <option value="1000">1 : 1000</option>
+                        <option value="2000">1 : 2000</option>
+                    </select>
+                </div>
+
+                <div class="pt-2 border-t border-slate-100 dark:border-slate-700/60 space-y-1.5 text-xs">
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">Jaminan Margin (Required):</span>
+                        <span id="calcRequiredMargin" class="font-bold text-blue-600 dark:text-blue-400">$0.00</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">Sisa Free Margin:</span>
+                        <span id="calcFreeMargin" class="font-bold text-slate-700 dark:text-slate-200">$0.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4: Swap Calculator (FITUR BARU) -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-200/80 dark:border-slate-700 space-y-4">
+                <h2 class="font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2 text-base">
+                    <i class="fa-solid fa-moon text-purple-500"></i> Swap / Biaya Inap
+                </h2>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">
+                            Swap Long (Pts)
+                        </label>
+                        <input type="number" id="swapLongInput" value="-12.5" step="any"
+                            class="w-full bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl px-3 py-2.5 font-semibold text-slate-800 dark:text-white focus:ring-2 focus:ring-purple-500 focus:outline-none text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">
+                            Swap Short (Pts)
+                        </label>
+                        <input type="number" id="swapShortInput" value="4.2" step="any"
+                            class="w-full bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl px-3 py-2.5 font-semibold text-slate-800 dark:text-white focus:ring-2 focus:ring-purple-500 focus:outline-none text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">
+                        Durasi Menginap (Malam / Hari)
+                    </label>
+                    <input type="number" id="swapDaysInput" value="1" min="1" step="1"
+                        class="w-full bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-xl px-4 py-2.5 font-semibold text-slate-800 dark:text-white focus:ring-2 focus:ring-purple-500 focus:outline-none text-sm">
+                </div>
+            </div>
+
         </div>
 
         <!-- Action Button -->
@@ -225,9 +284,9 @@
             </button>
         </div>
 
-        <!-- Output / Hasil Perhitungan Card (Inspirasi Layout Gambar) -->
+        <!-- Output / Hasil Perhitungan Card -->
         <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200/80 dark:border-slate-700 overflow-hidden">
-            <!-- Header Bar Warna Hijau Khas Gambar Referensi -->
+            <!-- Header Bar -->
             <div class="bg-emerald-500 text-white px-5 py-3 flex justify-between items-center">
                 <h3 class="font-bold text-sm sm:text-base flex items-center gap-2">
                     <i class="fa-solid fa-square-poll-vertical"></i> Ringkasan Parameter Hasil
@@ -238,7 +297,7 @@
             </div>
 
             <!-- Grid Hasil Tampilan Utama -->
-            <div class="p-4 sm:p-6 grid grid-cols-2 sm:grid-cols-5 gap-4 text-center divide-y sm:divide-y-0 sm:divide-x divide-slate-100 dark:divide-slate-700">
+            <div class="p-4 sm:p-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 text-center divide-y sm:divide-y-0 divide-slate-100 dark:divide-slate-700">
                 
                 <!-- SL Pips / Points -->
                 <div class="pt-2 sm:pt-0">
@@ -246,7 +305,7 @@
                         SL Pips / Point
                         <button onclick="showInfo('SL Pips', 'Jarak harga dari Open Price ke Stop Loss dalam satuan Pips/Points.')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-circle-info text-[10px]"></i></button>
                     </p>
-                    <p id="outSlPips" class="text-xl sm:text-2xl font-bold text-rose-500 dark:text-rose-400">-2,000</p>
+                    <p id="outSlPips" class="text-xl font-bold text-rose-500 dark:text-rose-400">-2,000</p>
                 </div>
 
                 <!-- TP Pips / Points -->
@@ -255,7 +314,7 @@
                         TP Pips / Point
                         <button onclick="showInfo('TP Pips', 'Jarak harga dari Open Price ke Take Profit dalam satuan Pips/Points.')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-circle-info text-[10px]"></i></button>
                     </p>
-                    <p id="outTpPips" class="text-xl sm:text-2xl font-bold text-emerald-500 dark:text-emerald-400">10,000</p>
+                    <p id="outTpPips" class="text-xl font-bold text-emerald-500 dark:text-emerald-400">10,000</p>
                 </div>
 
                 <!-- Lot Recommended -->
@@ -264,7 +323,7 @@
                         Rekomendasi Lot
                         <button onclick="showInfo('Ukuran Lot', 'Ukuran posisi aman yang dihitung berdasarkan persen risiko dari saldo Anda.')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-circle-info text-[10px]"></i></button>
                     </p>
-                    <p id="outLot" class="text-2xl sm:text-3xl font-extrabold text-slate-800 dark:text-white">0.10</p>
+                    <p id="outLot" class="text-2xl font-extrabold text-slate-800 dark:text-white">0.10</p>
                 </div>
 
                 <!-- Nett SL ($) -->
@@ -273,16 +332,43 @@
                         Nett SL ($)
                         <button onclick="showInfo('Nett SL', 'Potensi kerugian maksimal dalam Dolar ($) jika mengenai Stop Loss.')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-circle-info text-[10px]"></i></button>
                     </p>
-                    <p id="outNettSl" class="text-xl sm:text-2xl font-bold text-rose-500 dark:text-rose-400">$-200.00</p>
+                    <p id="outNettSl" class="text-xl font-bold text-rose-500 dark:text-rose-400">$-200.00</p>
                 </div>
 
                 <!-- Nett TP ($) -->
-                <div class="pt-2 sm:pt-0">
+                <div class="pt-2 sm:pt-0 border-t sm:border-t-0 pt-3 sm:pt-0">
                     <p class="text-xs font-semibold text-slate-400 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center justify-center gap-1">
                         Nett TP ($)
                         <button onclick="showInfo('Nett TP', 'Potensi keuntungan dalam Dolar ($) jika mengenai Take Profit.')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-circle-info text-[10px]"></i></button>
                     </p>
-                    <p id="outNettTp" class="text-xl sm:text-2xl font-bold text-emerald-500 dark:text-emerald-400">$1,000.00</p>
+                    <p id="outNettTp" class="text-xl font-bold text-emerald-500 dark:text-emerald-400">$1,000.00</p>
+                </div>
+
+                <!-- Required Margin ($) -->
+                <div class="pt-3 sm:pt-0 border-t sm:border-t-0">
+                    <p class="text-xs font-semibold text-slate-400 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center justify-center gap-1">
+                        Required Margin
+                        <button onclick="showInfo('Required Margin', 'Jaminan dana minimum yang ditahan broker untuk transaksi lot ini.')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-circle-info text-[10px]"></i></button>
+                    </p>
+                    <p id="outRequiredMargin" class="text-xl font-bold text-blue-500 dark:text-blue-400">$4,140.00</p>
+                </div>
+
+                <!-- Margin Level (%) -->
+                <div class="pt-3 sm:pt-0 border-t sm:border-t-0">
+                    <p class="text-xs font-semibold text-slate-400 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center justify-center gap-1">
+                        Margin Level
+                        <button onclick="showInfo('Margin Level', 'Rasio ketahanan akun (Balance/Margin x 100%). Usahakan selalu di atas 200%.')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-circle-info text-[10px]"></i></button>
+                    </p>
+                    <p id="outMarginLevel" class="text-xl font-bold text-emerald-500 dark:text-emerald-400">241.5%</p>
+                </div>
+
+                <!-- Total Swap ($) -->
+                <div class="pt-3 sm:pt-0 border-t sm:border-t-0">
+                    <p class="text-xs font-semibold text-slate-400 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center justify-center gap-1">
+                        Estimasi Swap ($)
+                        <button onclick="showInfo('Estimasi Swap', 'Estimasi biaya atau pendapatan menginap berdasarkan posisi & jumlah hari.')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-circle-info text-[10px]"></i></button>
+                    </p>
+                    <p id="outTotalSwap" class="text-xl font-bold text-purple-500 dark:text-purple-400">$-1.25</p>
                 </div>
 
             </div>
@@ -306,16 +392,16 @@
             </h3>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-slate-600 dark:text-slate-300">
                 <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl">
-                    <span class="font-bold text-emerald-600 dark:text-emerald-400 block mb-1">1. Lot Size</span>
-                    Jumlah unit/kontrak posisi trading. Kalkulator ini menghitungkan Lot ideal agar modal Anda aman dari *margin call*.
-                </div>
-                <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl">
-                    <span class="font-bold text-emerald-600 dark:text-emerald-400 block mb-1">2. Risk Management</span>
+                    <span class="font-bold text-emerald-600 dark:text-emerald-400 block mb-1">1. Lot Size & Risk</span>
                     Disarankan membatasi risiko maksimal 1% - 2% dari total Saldo (Balance) per transaksi.
                 </div>
                 <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl">
-                    <span class="font-bold text-emerald-600 dark:text-emerald-400 block mb-1">3. Risk to Reward (RRR)</span>
-                    Cari transaksi dengan RRR minimal 1 : 1.5 atau 1 : 2 agar secara statistik dalam jangka panjang akun tetap profit.
+                    <span class="font-bold text-emerald-600 dark:text-emerald-400 block mb-1">2. Margin & Leverage</span>
+                    Makin tinggi leverage, makin kecil jaminan (Required Margin) yang ditahan. Jaga Margin Level di atas 100%.
+                </div>
+                <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl">
+                    <span class="font-bold text-emerald-600 dark:text-emerald-400 block mb-1">3. Swap Cost</span>
+                    Biaya/bunga inap transaksi jika ditahan melewati pukul 00:00 (server time). Nilainya bisa positif (+) atau negatif (-).
                 </div>
             </div>
         </div>
@@ -340,18 +426,18 @@
         let orderType = 'BUY'; // BUY or SELL
         let riskMode = 'percent'; // percent or dollar
 
-        // Preset Defaults for Instruments
+        // Preset Defaults for Instruments (termasuk nilai default swap)
         const presets = {
-            'XAUUSD': { open: 4140, sl: 4120, tp: 4240 },
-            'XAGUSD': { open: 30.50, sl: 30.00, tp: 32.00 },
-            'EURUSD': { open: 1.08500, sl: 1.08200, tp: 1.09200 },
-            'GBPUSD': { open: 1.29500, sl: 1.29100, tp: 1.30500 },
-            'USDJPY': { open: 154.200, sl: 153.800, tp: 155.200 },
-            'AUDUSD': { open: 0.65500, sl: 0.65200, tp: 0.66200 },
-            'USDCAD': { open: 1.38500, sl: 1.38200, tp: 1.39200 },
-            'BTCUSD': { open: 67500, sl: 66000, tp: 71000 },
-            'ETHUSD': { open: 2650, sl: 2550, tp: 2900 },
-            'SOLUSD': { open: 175, sl: 165, tp: 200 }
+            'XAUUSD': { open: 4140, sl: 4120, tp: 4240, swapLong: -12.5, swapShort: 4.2 },
+            'XAGUSD': { open: 30.50, sl: 30.00, tp: 32.00, swapLong: -3.0, swapShort: 1.0 },
+            'EURUSD': { open: 1.08500, sl: 1.08200, tp: 1.09200, swapLong: -6.2, swapShort: 1.8 },
+            'GBPUSD': { open: 1.29500, sl: 1.29100, tp: 1.30500, swapLong: -4.5, swapShort: 0.5 },
+            'USDJPY': { open: 154.200, sl: 153.800, tp: 155.200, swapLong: 8.5, swapShort: -14.2 },
+            'AUDUSD': { open: 0.65500, sl: 0.65200, tp: 0.66200, swapLong: -2.1, swapShort: -1.0 },
+            'USDCAD': { open: 1.38500, sl: 1.38200, tp: 1.39200, swapLong: 1.2, swapShort: -5.4 },
+            'BTCUSD': { open: 67500, sl: 66000, tp: 71000, swapLong: -25.0, swapShort: -25.0 },
+            'ETHUSD': { open: 2650, sl: 2550, tp: 2900, swapLong: -10.0, swapShort: -10.0 },
+            'SOLUSD': { open: 175, sl: 165, tp: 200, swapLong: -5.0, swapShort: -5.0 }
         };
 
         // DOM Elements
@@ -361,6 +447,10 @@
         const openPriceInput = document.getElementById('openPriceInput');
         const slPriceInput = document.getElementById('slPriceInput');
         const tpPriceInput = document.getElementById('tpPriceInput');
+        const leverageSelect = document.getElementById('leverageSelect');
+        const swapLongInput = document.getElementById('swapLongInput');
+        const swapShortInput = document.getElementById('swapShortInput');
+        const swapDaysInput = document.getElementById('swapDaysInput');
         
         // Output DOMs
         const outSlPips = document.getElementById('outSlPips');
@@ -368,6 +458,11 @@
         const outLot = document.getElementById('outLot');
         const outNettSl = document.getElementById('outNettSl');
         const outNettTp = document.getElementById('outNettTp');
+        const outRequiredMargin = document.getElementById('outRequiredMargin');
+        const outMarginLevel = document.getElementById('outMarginLevel');
+        const outTotalSwap = document.getElementById('outTotalSwap');
+        const calcRequiredMargin = document.getElementById('calcRequiredMargin');
+        const calcFreeMargin = document.getElementById('calcFreeMargin');
         const rrrBadge = document.getElementById('rrrBadge');
         const rrrDot = document.getElementById('rrrDot');
         const rrrText = document.getElementById('rrrText');
@@ -435,12 +530,14 @@
                 openPriceInput.value = presets[selectedAsset].open;
                 slPriceInput.value = presets[selectedAsset].sl;
                 tpPriceInput.value = presets[selectedAsset].tp;
+                swapLongInput.value = presets[selectedAsset].swapLong;
+                swapShortInput.value = presets[selectedAsset].swapShort;
             }
             calculateTradingParams();
         });
 
         // Event Listeners for inputs
-        [balanceInput, riskInput, openPriceInput, slPriceInput, tpPriceInput].forEach(input => {
+        [balanceInput, riskInput, openPriceInput, slPriceInput, tpPriceInput, leverageSelect, swapLongInput, swapShortInput, swapDaysInput].forEach(input => {
             input.addEventListener('input', calculateTradingParams);
         });
 
@@ -451,6 +548,10 @@
             const openPrice = parseFloat(openPriceInput.value) || 0;
             const slPrice = parseFloat(slPriceInput.value) || 0;
             const tpPrice = parseFloat(tpPriceInput.value) || 0;
+            const leverage = parseInt(leverageSelect.value) || 100;
+            const swapLong = parseFloat(swapLongInput.value) || 0;
+            const swapShort = parseFloat(swapShortInput.value) || 0;
+            const swapDays = parseInt(swapDaysInput.value) || 1;
 
             const selectedOption = assetSelect.options[assetSelect.selectedIndex];
             const contractSize = parseFloat(selectedOption.dataset.contract) || 100000;
@@ -499,34 +600,30 @@
             let slDistance = Math.abs(openPrice - slPrice);
             let tpDistance = Math.abs(openPrice - tpPrice);
 
-            // Determine Pip multiplier based on digits
             let pipMultiplier = 1;
             if (assetSelect.value === 'XAUUSD') {
-                pipMultiplier = 100; // Standard Gold Pips/Points representation
+                pipMultiplier = 100; 
             } else if (assetDigits === 5) {
                 pipMultiplier = 10000;
             } else if (assetDigits === 3) {
                 pipMultiplier = 100;
             } else if (assetType === 'crypto') {
-                pipMultiplier = 1; // Direct price difference for crypto
+                pipMultiplier = 1; 
             }
 
             let slPips = slDistance * pipMultiplier;
             let tpPips = tpDistance * pipMultiplier;
 
-            // Display Pips
             const slSign = (orderType === 'BUY' && slPrice < openPrice) || (orderType === 'SELL' && slPrice > openPrice) ? '-' : '';
             outSlPips.innerText = slSign + slPips.toLocaleString('en-US', { maximumFractionDigits: 1 });
             outTpPips.innerText = tpPips.toLocaleString('en-US', { maximumFractionDigits: 1 });
 
             // 4. Lot Size Calculation
-            // Risk = LotSize * ContractSize * PriceDelta
             let calculatedLot = 0;
             if (slDistance > 0) {
                 calculatedLot = riskInDollar / (slDistance * contractSize);
             }
 
-            // Formatting Lot Size based on asset type
             let lotDisplay = "0.00";
             if (assetType === 'crypto') {
                 lotDisplay = calculatedLot.toFixed(4);
@@ -549,7 +646,6 @@
             let rrrRatio = slDistance > 0 ? (tpDistance / slDistance) : 0;
             rrrBadge.innerText = `RRR - 1:${rrrRatio.toFixed(1)}`;
 
-            // Assess RRR for Beginners
             if (rrrRatio >= 2) {
                 rrrDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-500";
                 rrrText.innerText = `Risk/Reward Ratio Sangat Bagus (1 : ${rrrRatio.toFixed(1)})`;
@@ -559,6 +655,30 @@
             } else {
                 rrrDot.className = "w-2.5 h-2.5 rounded-full bg-rose-500";
                 rrrText.innerText = `Risk/Reward Ratio Kurang Ideal (1 : ${rrrRatio.toFixed(1)}) - Potensi profit lebih kecil dari risiko`;
+            }
+
+            // 7. Margin & Leverage Calculations (FITUR BARU)
+            const notionalValue = calculatedLot * contractSize * openPrice;
+            const requiredMargin = leverage > 0 ? (notionalValue / leverage) : 0;
+            const freeMargin = balance - requiredMargin;
+            const marginLevel = requiredMargin > 0 ? (balance / requiredMargin) * 100 : 0;
+
+            outRequiredMargin.innerText = '$' + requiredMargin.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            calcRequiredMargin.innerText = '$' + requiredMargin.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            calcFreeMargin.innerText = '$' + freeMargin.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            outMarginLevel.innerText = marginLevel > 0 ? marginLevel.toFixed(1) + '%' : '0%';
+
+            // 8. Swap Calculation (FITUR BARU)
+            const swapPerPoint = (orderType === 'BUY') ? swapLong : swapShort;
+            const pointValue = (assetType === 'crypto') ? 1.0 : (1.0 / pipMultiplier);
+            const totalSwap = calculatedLot * swapPerPoint * pointValue * swapDays;
+
+            const swapSign = totalSwap >= 0 ? '+' : '';
+            outTotalSwap.innerText = swapSign + '$' + totalSwap.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            if (totalSwap < 0) {
+                outTotalSwap.className = "text-xl font-bold text-rose-500 dark:text-rose-400";
+            } else {
+                outTotalSwap.className = "text-xl font-bold text-emerald-500 dark:text-emerald-400";
             }
         }
 
